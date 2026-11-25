@@ -6,7 +6,7 @@ import pandas as pd
 
 
 ROOT = Path(__file__).parent
-DATA_PATH = ROOT / "data" / "localized_pos.csv"
+DATA_PATH = ROOT / "localized_pos.csv"
 OUTPUT_DIR = ROOT / "artifacts"
 
 

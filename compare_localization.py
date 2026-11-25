@@ -7,17 +7,16 @@ import pandas as pd
 
 
 ROOT = Path(__file__).parent
-DATA_DIR = ROOT / "data"
-LOCALIZED_PATH = DATA_DIR / "localized_pos.csv"
-TELEMETRY_PATH = DATA_DIR / "telemetry.csv"
+LOCALIZED_PATH = ROOT / "localized_pos.csv"
+TELEMETRY_PATH = ROOT / "telemetry.csv"
 OUTPUT_DIR = ROOT / "artifacts"
 
 
 def main() -> None:
     if not TELEMETRY_PATH.exists():
         raise SystemExit(
-            "Missing data/telemetry.csv. Download NASA's telemetry view with:\n"
-            "curl -fL -o data/telemetry.csv "
+            "Missing telemetry.csv. Download NASA's telemetry view with:\n"
+            "curl -fL -o telemetry.csv "
             "https://planetarydata.jpl.nasa.gov/img/data/msl/msl_places/"
             "data_localizations/telemetry.csv"
         )

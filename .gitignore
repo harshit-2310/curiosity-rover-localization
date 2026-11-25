@@ -3,5 +3,5 @@ __pycache__/
 *.py[cod]
 artifacts/
 work/
-data/telemetry.csv
+telemetry.csv
 .DS_Store

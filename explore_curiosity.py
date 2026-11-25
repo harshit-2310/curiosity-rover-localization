@@ -4,7 +4,7 @@ import pandas as pd
 from pathlib import Path
 
 
-DATA_PATH = Path(__file__).parent / "data" / "localized_pos.csv"
+DATA_PATH = Path(__file__).parent / "localized_pos.csv"
 
 
 def main() -> None:
