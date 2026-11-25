@@ -10,7 +10,7 @@ How does Curiosity's onboard position estimate compare with the refined localiza
 
 We start with NASA's `localized_pos.csv` file. It contains position and orientation rows in several coordinate frames, including northing/easting, latitude/longitude, attitude, and mission sol. NASA describes the archive and its CSV views in the [PDS dataset record](https://pds.nasa.gov/ds-view/pds/viewProfile.jsp?dsid=MSL-M-ROVER-6-RDR-PLACES-V1.0) and [PLACES file guide](https://planetarydata.jpl.nasa.gov/img/data/msl/msl_places/document/PLACES_PDS_SIS.pdf).
 
-The public CSV is included in `data/` so the project works offline after cloning. It is about 341 KB. No API key, account, or paid service is needed.
+The public 341 KB CSV is included at the repository root so the first two lessons work offline after cloning. No API key, account, or paid service is needed.
 
 ## Lesson 1: inspect the data
 
@@ -33,18 +33,18 @@ This removes the `drive = 0` convenience rows, orders the remaining rover drive 
 
 ## Lesson 3: compare rover and localization positions
 
-Download NASA's larger `telemetry.csv` view (about 24 MB) into `data/`, then run:
+Download NASA's larger `telemetry.csv` view (about 24 MB) into the repository root, then run:
 
 ```bash
-curl -fL -o data/telemetry.csv https://planetarydata.jpl.nasa.gov/img/data/msl/msl_places/data_localizations/telemetry.csv
+curl -fL -o telemetry.csv https://planetarydata.jpl.nasa.gov/img/data/msl/msl_places/data_localizations/telemetry.csv
 python compare_localization.py
 ```
 
 The analysis matches each localized checkpoint with the highest-pose telemetry position for the same site and drive, then measures the 2D distance between them. NASA notes that telemetry preserves the rover's position before ground adjustment, while `localized_pos` contains the localization team's refined locations. It describes comparing these views as a way to estimate accumulated position disagreement (including effects such as wheel slip). This is a simple educational comparison, not a mission-grade navigation estimate. See the [NASA PLACES guide](https://planetarydata.jpl.nasa.gov/img/data/msl/msl_places/document/PLACES_PDS_SIS.pdf).
 
-![Curiosity traverse map](docs/images/curiosity_traverse.svg)
+![Curiosity traverse map](curiosity_traverse.svg)
 
-![Position disagreement by sol](docs/images/localization_drift.svg)
+![Position disagreement by sol](localization_drift.svg)
 
 ## Planned project stages
 
@@ -69,7 +69,7 @@ python detect_adjustments.py
 
 This Isolation Forest uses three features: the change in the localization correction vector, the distance between rover-reported checkpoints, and the distance between localized checkpoints. It flags the most unusual 3% of checkpoint intervals for human review. Localization is sparse, so an interval can span more than one drive. There are no ground-truth fault labels in this analysis, so a flag means “unusual relative to this dataset,” not “the rover failed.”
 
-![Unusual correction intervals](docs/images/unusual_adjustments.svg)
+![Unusual correction intervals](unusual_adjustments.svg)
 
 ## Limitations and security notes
 
